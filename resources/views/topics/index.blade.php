@@ -1,4 +1,4 @@
-@component('laravolt::layout.app', ['title' => 'Manajemen Berita'])
+@component('laravolt::layout.app', ['title' => 'Manajemen Topik'])
     <x-slot name="actions">
         <a href="{{ route('topics.create') }}" class="ui primary button">
             <i class="plus icon"></i> Tambah Topik
@@ -6,8 +6,6 @@
     </x-slot>
 
     <div class="ui segment">
-
         @livewire(\App\Http\Livewire\Table\TopicTable::class)
-
     </div>
 @endcomponent

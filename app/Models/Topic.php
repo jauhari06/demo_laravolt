@@ -4,11 +4,13 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Support\Facades\Auth; 
+use Illuminate\Support\Facades\Auth;
+use App\Models\User; 
+use Laravolt\Suitable\AutoSort; 
 
 class Topic extends Model
 {
-    use HasFactory;
+    use HasFactory, AutoSort;
 
     protected $fillable = ['name', 'slug'];
 

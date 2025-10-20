@@ -8,12 +8,32 @@ use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
 
+
 class NewsRequest extends FormRequest
 {
     public function authorize(): bool
     {
         return Auth::check();
     }
+
+    protected function prepareForValidation(): void
+{
+    if ($this->filled('published_at')) {
+        try {
+            Carbon::setLocale('id');
+            \Locale::setDefault('id_ID');
+
+            $converted = Carbon::createFromFormat('d F Y H:i', $this->published_at, 'Asia/Jakarta')
+                ->toDateTimeString();
+
+            $this->merge([
+                'published_at' => $converted,
+            ]);
+        } catch (\Exception $e) {
+        }
+    }
+}
+
 
     public function rules(): array
     {

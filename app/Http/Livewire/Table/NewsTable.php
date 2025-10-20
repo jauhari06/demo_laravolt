@@ -24,20 +24,32 @@ class NewsTable extends TableView
         return News::query()
             ->with(['author', 'topic'])
             ->whereLike(['title', 'slug'], $this->search) 
-            ->latest('published_at')
+            ->autoSort($this->sortPayload())
             ->paginate();
     }
 
     public function columns(): array
-    {
-        return [
-            Numbering::make('No'),
-            Text::make('title', 'Judul')->searchable(),
-            Text::make('slug', 'Slug'),
-            Text::make('topic.name', 'Topik'),
-            Text::make('author.name', 'Penulis'),
-            DateTime::make('published_at', 'Tanggal Publikasi')->sortable(),
-            RestfulButton::make('news','	Action')->except('show'),
-        ];
-    }
+{
+    return [
+        Numbering::make('No'),
+
+        Text::make('title', 'Judul')
+            ->sortable()
+            ->searchable(),
+
+        Text::make('slug', 'Slug')
+            ->sortable(),
+
+        Text::make('topic.name', 'Topik')
+            ->sortable('topic_id'), 
+
+        Text::make('author.name', 'Penulis'),
+
+        DateTime::make('published_at', 'Tanggal Publikasi')
+            ->sortable(),
+
+        RestfulButton::make('news', 'Action')->except('show'),
+    ];
+}
+
 }

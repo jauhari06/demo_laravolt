@@ -8,11 +8,12 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use App\Models\User; 
 use App\Models\Topic;
 use Illuminate\Support\Facades\Auth; 
+use Laravolt\Suitable\AutoSort;
 
 
 class News extends Model
 {
-    use HasFactory;
+    use HasFactory, AutoSort;
 
     protected $fillable = [
         'title',

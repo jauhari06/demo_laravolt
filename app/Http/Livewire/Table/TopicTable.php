@@ -20,17 +20,23 @@ class TopicTable extends TableView
     {
         return Topic::query()
             ->whereLike(['name', 'slug'], $this->search)
-            ->latest('created_at')
+            ->autoSort($this->sortPayload())
             ->paginate();
     }
 
     public function columns(): array
-    {
-        return [
-            Numbering::make('No'),
-            Text::make('name', 'Nama Topik')->searchable(),
-            Text::make('slug', 'Slug'),
-            RestfulButton::make('topics','	Action')->except('show'),
-        ];
-    }
+{
+    return [
+        Numbering::make('No'),
+
+        Text::make('name', 'Nama Topik')
+            ->sortable()
+            ->searchable(),
+
+        Text::make('slug', 'Slug')
+            ->sortable(),
+
+        RestfulButton::make('topics', 'Action')->except('show'),
+    ];
+}
 }

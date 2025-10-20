@@ -5,6 +5,7 @@ namespace App\Providers;
 use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use App\Http\Livewire\Table\NewsTable;
+use App\Http\Livewire\Table\TopicTable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -31,5 +32,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Livewire::component('table.news-table', NewsTable::class);
+        Livewire::component('table.topic-table', TopicTable::class);
     }
 }
