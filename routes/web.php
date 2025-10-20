@@ -19,11 +19,15 @@ use App\Http\Controllers\TopicController;
 
 Route::redirect('/', 'auth/login');
 
-Route::middleware(['auth', 'verified'])->group(fn () => Route::get('/home', Home::class)->name('home'));
+// Route::middleware(['auth', 'verified'])->group(fn () => Route::get('/home', Home::class)->name('home'));
 
 include __DIR__.'/auth.php';
 include __DIR__.'/my.php';
 
-Route::post('/media/store', [MediaController::class, 'store'])->name('media::store');
+// Route::post('/media/store', [MediaController::class, 'store'])->name('media::store');
 
-Route::resource('topics', TopicController::class);
+Route::middleware(['auth', 'verified'])->group(function () {
+    Route::get('/home', Home::class)->name('home');
+
+    Route::resource('topics', TopicController::class)->except(['show']);
+});

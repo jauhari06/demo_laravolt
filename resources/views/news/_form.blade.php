@@ -8,7 +8,10 @@
     
     <p>Konten Berita</p>
     {!! form()->textarea('content', 'Konten Berita')->rows(15)->required()->value($news->content ?? '') !!}
-
+    {{-- <p>Konten Berita</p>
+    {!! form()
+        ->redactor('content', $news->content ?? '') 
+        ->required() !!} --}}
 
     <p>Topik Berita</p>
     {!! form()

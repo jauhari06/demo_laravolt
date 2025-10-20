@@ -6,19 +6,19 @@ return [
         'order' => 10, 
         'menu' => [
             'Home' => [
-                'route' => 'topics.index',
-                'active' => 'topics/*',
+                'route' => 'home',
+                'active' => 'home/*',
                 'icon' => 'tags', 
             ],
-            'Manajemen Berita' => [
+            'Berita' => [
                 'route' => 'news.index',
                 'active' => 'news/*',
                 'icon' => 'newspaper', 
             ],
-            'Manajemen Topik' => [
-                'route' => 'topics.index',       // route yang sudah kita buat
-                'active' => 'topics/*',          // agar menu aktif saat di halaman /topics/*
-                'icon' => 'tags',                // ikon tags cocok untuk topik
+            'Topik' => [
+                'route' => 'topics.index',       
+                'active' => 'topics/*',         
+                'icon' => 'tags',                
             ],
         ],
     ],

@@ -1,0 +1,2 @@
+<div>Livewire aktif!</div>
+

@@ -3,15 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Topic;
-use Illuminate\Http\Request;
-use Illuminate\Support\Str;
+use App\Http\Requests\TopicsRequest; 
 
 class TopicController extends Controller
 {
+
     public function index()
     {
-        $topics = Topic::latest()->paginate(10);
-        return view('topics.index', compact('topics'));
+        return view('topics.index');
     }
 
     public function create()
@@ -19,18 +18,11 @@ class TopicController extends Controller
         return view('topics.create');
     }
 
-    public function store(Request $request)
+    public function store(TopicsRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:topics,name',
-        ]);
+        Topic::create($request->validated());
 
-        Topic::create([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-        ]);
-
-        return redirect()->route('topics.index')->withSuccess('Topik berhasil dibuat.');
+        return redirect()->route('topics.index')->with('success', 'Topik berhasil ditambahkan');
     }
 
     public function edit(Topic $topic)
@@ -38,24 +30,18 @@ class TopicController extends Controller
         return view('topics.edit', compact('topic'));
     }
 
-    public function update(Request $request, Topic $topic)
+  
+    public function update(TopicsRequest $request, Topic $topic)
     {
-        $request->validate([
-            'name' => 'required|string|max:255|unique:topics,name,' . $topic->id,
-        ]);
+        $topic->update($request->validated());
 
-        $topic->update([
-            'name' => $request->name,
-            'slug' => Str::slug($request->name),
-        ]);
-
-        return redirect()->route('topics.index')->withSuccess('Topik berhasil diperbarui.');
+        return redirect()->route('topics.index')->with('success', 'Topik berhasil diperbarui');
     }
 
     public function destroy(Topic $topic)
     {
         $topic->delete();
 
-        return redirect()->route('topics.index')->withSuccess('Topik berhasil dihapus.');
+        return redirect()->route('topics.index')->with('success', 'Topik berhasil dihapus');
     }
 }

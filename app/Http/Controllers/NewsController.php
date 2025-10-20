@@ -6,7 +6,6 @@ use App\Models\News;
 use Illuminate\Http\Request;
 use App\Http\Requests\NewsRequest;
 use Illuminate\Support\Facades\Auth;
-use Carbon\Carbon;
 use Illuminate\Support\Facades\Storage;
 
 class NewsController extends Controller

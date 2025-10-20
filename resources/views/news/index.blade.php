@@ -4,8 +4,8 @@
             <i class="plus icon"></i> Tambah Berita
         </a>
     </x-slot>
-    
+
     <div class="ui segment">
-        @livewire('news-table') 
+        @livewire(\App\Http\Livewire\Table\NewsTable::class)
     </div>
 @endcomponent

@@ -1,6 +1,5 @@
 <x-volt-app title="Dashboard">
     
-
     <h2 class="ui header">
         <div class="content">
             Dashboard Statistik
@@ -34,7 +33,9 @@
                 <div class="sub header">Jumlah berita yang dipublikasikan per hari</div>
             </div>
         </h3>
-        @livewire(\App\Http\Livewire\Chart\NewsThisMonthChart::class)
+        @livewire(\App\Http\Livewire\Chart\NewsMonthChart::class)
     </div>
+    {{-- Activity log --}}
+
 
 </x-volt-app>

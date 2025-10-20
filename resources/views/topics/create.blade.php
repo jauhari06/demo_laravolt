@@ -1,11 +1,14 @@
-<x-volt-app title="Tambah Topik">
-    <h2 class="ui header">Tambah Topik Baru</h2>
+@component('laravolt::layout.app', ['title' => 'Tambah Topik Baru'])
+<x-slot name="actions">
+    <a href="{{ route('topics.index') }}" class="ui icon button">
+        <i class="angle left icon"></i> Kembali
+    </a>
+</x-slot>
+    
+    {!! form()->open()->post()->multipart()->action(route('topics.store')) !!}
+    
+        @include('topics.form')
 
-    <form class="ui form" action="{{ route('topics.store') }}" method="POST">
-        @csrf
-        {!! form()->text('name', 'Nama Topik')->required() !!}
-        <div class="ui hidden divider"></div>
-        {!! form()->submit('Simpan Topik') !!}
-        <a href="{{ route('topics.index') }}" class="ui button">Batal</a>
-    </form>
-</x-volt-app>
+    {!! form()->close() !!}
+
+@endcomponent
