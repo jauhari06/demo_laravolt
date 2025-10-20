@@ -1,10 +1,10 @@
 <div class="ui segment">
     
     <p>Judul Berita</p>
-    {!! form()->text('title', 'Judul Berita')->required() !!} 
+    {!! form()->text('title', 'Judul Berita')->required()->value($news->title ?? '') !!}
     
     <p>Slug</p>
-    {!! form()->text('slug', 'Slug')->hint('Akan digunakan di URL, hanya boleh huruf, angka, dan dash')->required() !!}
+    {!! form()->text('slug', 'Slug')->hint('Akan digunakan di URL, hanya boleh huruf, angka, dan dash')->required()->value($news->slug ?? '') !!}
     
     <p>Konten Berita</p>
     {!! form()->textarea('content', 'Konten Berita')->rows(15)->required()->value($news->content ?? '') !!}

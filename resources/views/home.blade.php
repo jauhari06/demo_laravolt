@@ -36,6 +36,17 @@
         @livewire(\App\Http\Livewire\Chart\NewsMonthChart::class)
     </div>
     {{-- Activity log --}}
+    <div class="ui segment">
+        <h3 class="ui header">
+            <i class="history icon"></i>
+            <div class="content">
+                Aktivitas Terbaru
+                <div class="sub header">Catatan aktivitas pengguna dalam sistem</div>
+            </div>
+        </h3>
+    
+        @livewire(\App\Http\Livewire\Table\ActivityTable::class)
+    </div>
 
 
 </x-volt-app>
