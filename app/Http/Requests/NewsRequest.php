@@ -34,7 +34,6 @@ class NewsRequest extends FormRequest
     }
 }
 
-
     public function rules(): array
     {
 
