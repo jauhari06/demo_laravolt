@@ -9,11 +9,12 @@ use App\Models\User;
 use App\Models\Topic;
 use Illuminate\Support\Facades\Auth; 
 use Laravolt\Suitable\AutoSort;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 
 class News extends Model
 {
-    use HasFactory, AutoSort;
+    use HasFactory, AutoSort, SoftDeletes;
 
     protected $fillable = [
         'title',

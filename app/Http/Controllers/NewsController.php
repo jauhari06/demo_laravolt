@@ -65,11 +65,6 @@ class NewsController extends Controller
 
     public function destroy(News $news)
     {
-
-        if ($news->image && Storage::exists($news->image)) {
-            Storage::delete($news->image);
-        }
-
         $news->delete();
 
         return redirect()
