@@ -44,9 +44,6 @@
                 <div class="sub header">Catatan aktivitas pengguna dalam sistem</div>
             </div>
         </h3>
-    
         @livewire(\App\Http\Livewire\Table\ActivityTable::class)
     </div>
-
-
 </x-volt-app>

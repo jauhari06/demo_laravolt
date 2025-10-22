@@ -13,12 +13,12 @@ class NewsController extends Controller
     public function index()
     {
  
-        return view('news.index');
+        return view('content.news.index');
     }
 
     public function create()
     {
-        return view('news.create');
+        return view('content.news.create');
     }
 
     public function store(NewsRequest $request)
@@ -43,7 +43,7 @@ class NewsController extends Controller
     {
 
         $news->load('topic');
-        return view('news.edit', compact('news'));
+        return view('content.news.edit', compact('news'));
     }
 
     public function update(NewsRequest $request, News $news)

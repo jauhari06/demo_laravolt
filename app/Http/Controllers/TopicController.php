@@ -10,12 +10,12 @@ class TopicController extends Controller
 
     public function index()
     {
-        return view('topics.index');
+        return view('content.topics.index');
     }
 
     public function create()
     {
-        return view('topics.create');
+        return view('content.topics.create');
     }
 
     public function store(TopicsRequest $request)
@@ -27,7 +27,7 @@ class TopicController extends Controller
 
     public function edit(Topic $topic)
     {
-        return view('topics.edit', compact('topic'));
+        return view('content.topics.edit', compact('topic'));
     }
 
   

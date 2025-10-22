@@ -6,6 +6,7 @@ use Illuminate\Support\ServiceProvider;
 use Livewire\Livewire;
 use App\Http\Livewire\Table\NewsTable;
 use App\Http\Livewire\Table\TopicTable;
+use App\Http\Livewire\Table\ActivityTable;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -33,5 +34,6 @@ class AppServiceProvider extends ServiceProvider
     {
         Livewire::component('table.news-table', NewsTable::class);
         Livewire::component('table.topic-table', TopicTable::class);
+        Livewire::component('table.activity-table', ActivityTable::class);
     }
 }
