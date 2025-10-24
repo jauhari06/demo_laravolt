@@ -6,7 +6,7 @@
     </x-slot>
 
     {!! form()->post(route('news.store'))->multipart() !!}
-        
+    {!! form()->hidden('status', 'draft') !!}
         <div class="ui segment">
             {!! form()->text('title')
                 ->label('Judul Berita')

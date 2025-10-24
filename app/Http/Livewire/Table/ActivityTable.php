@@ -13,7 +13,7 @@ class ActivityTable extends TableView
     public int $searchDebounce = 400;
 
     protected int $defaultPerPage = 15;
-    // protected array $perPageOptions = [10, 15, 30, 50];
+    protected array $perPageOptions = [10, 15, 30, 50];
 
     public function data()
     {

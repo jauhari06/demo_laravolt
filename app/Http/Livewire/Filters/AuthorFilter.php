@@ -4,7 +4,6 @@ use App\Models\User;
 use Laravolt\Ui\Filters\DropdownFilter;
 class AuthorFilter extends DropdownFilter
 {
-    // protected bool $manual = true;
     protected string $label = 'Penulis';
     public function apply($data, $value)
     {
@@ -20,5 +19,20 @@ class AuthorFilter extends DropdownFilter
             ->pluck('name', 'id')
             ->prepend('Semua Penulis', '')
             ->toArray();
+    }
+
+    public function render(): string
+    {
+        $key = $this->key();
+        $field=form()->dropdown($key, $this->options());
+        
+        if ($this->placeholder) {
+            $field->placeholder($this->placeholder);
+        }
+
+        return $field
+        ->label($this->label." - $key")
+        ->removeClass('clearable') 
+        ->attributes(['wire:model.live' => "filters.$key"]);
     }
 }

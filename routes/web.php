@@ -30,4 +30,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::get('/home', Home::class)->name('home');
 
     Route::resource('topics', TopicController::class)->except(['show']);
+    Route::post('/news/{id}/flag', [NewsController::class, 'flag'])->name('news.flag');
+    Route::post('/news/{id}/unflag', [NewsController::class, 'unflag'])->name('news.unflag');
+    Route::post('news/{news}/approve', [NewsController::class, 'approve'])->name('news.approve');
 });

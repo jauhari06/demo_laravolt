@@ -3,22 +3,24 @@
 return [
 
     'Content Management' => [
-        'order' => 10, 
+        'order' => 10,
         'menu' => [
             'Home' => [
                 'route' => 'home',
                 'active' => 'home/*',
-                'icon' => 'tags', 
+                'icon' => 'tags',
             ],
             'Berita' => [
                 'route' => 'news.index',
                 'active' => 'news/*',
-                'icon' => 'newspaper', 
+                'icon' => 'newspaper',
+                'permissions' => [\App\Enums\Permission::NEWS_VIEW],
             ],
             'Topik' => [
-                'route' => 'topics.index',       
-                'active' => 'topics/*',         
-                'icon' => 'tags',                
+                'route' => 'topics.index',
+                'active' => 'topics/*',
+                'icon' => 'tags',
+                'permissions' => [\App\Enums\Permission::TOPIC_VIEW],
             ],
         ],
     ],

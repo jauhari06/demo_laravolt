@@ -4,7 +4,6 @@ use App\Models\Topic;
 use Laravolt\Ui\Filters\DropdownFilter;
 class TopicFilter extends DropdownFilter
 {
-    // protected bool $manual = true;
     protected string $label = 'Topik';
     public function apply($data, $value)
     {
@@ -18,5 +17,20 @@ class TopicFilter extends DropdownFilter
     {
         return Topic::query()->pluck('name', 'id')
         ->prepend('Semua Topik', '')->toArray();
+    }
+
+    public function render(): string
+    {
+        $key = $this->key();
+        $field=form()->dropdown($key, $this->options());
+        
+        if ($this->placeholder) {
+            $field->placeholder($this->placeholder);
+        }
+
+        return $field
+        ->label($this->label." - $key")
+        ->removeClass('clearable') 
+        ->attributes(['wire:model.live' => "filters.$key"]);
     }
 }

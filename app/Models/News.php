@@ -25,10 +25,15 @@ class News extends Model
         'image',
         'views_count',
         'topic_id',
+        'status',
+        'approved_by',
+        'approved_at',
+        'is_flagged',
     ];
 
     protected $casts = [
         'published_at' => 'datetime',
+        'approved_at' => 'datetime',
     ];
 
     public function author(): BelongsTo
@@ -39,6 +44,11 @@ class News extends Model
 {
     return $this->belongsTo(Topic::class);
 }
+
+public function approvedBy(): BelongsTo 
+    {
+        return $this->belongsTo(User::class, 'approved_by', 'id');
+    }
 
 protected static function booted()
     {

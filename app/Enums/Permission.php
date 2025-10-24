@@ -9,6 +9,19 @@ use BenSampo\Enum\Enum;
  */
 final class Permission extends Enum
 {
-    // sample permission
-    // const POST_MANAGE = 'post.manage';
+    
+
+    // Permissions untuk News
+    const NEWS_VIEW   = 'news.view';   
+    const NEWS_CREATE = 'news.create'; 
+    const NEWS_EDIT   = 'news.edit';   
+    const NEWS_DELETE = 'news.delete'; 
+    const NEWS_PUBLISH= 'news.publish';
+    const NEWS_FLAG   = 'news.flag';
+
+    // Permissions untuk Topics
+    const TOPIC_VIEW   = 'topic.view';
+    const TOPIC_CREATE = 'topic.create';
+    const TOPIC_EDIT   = 'topic.edit';
+    const TOPIC_DELETE = 'topic.delete';
 }

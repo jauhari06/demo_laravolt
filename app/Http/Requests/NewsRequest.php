@@ -34,28 +34,25 @@ class NewsRequest extends FormRequest
     }
 }
 
-    public function rules(): array
-    {
+public function rules(): array
+{
+    $newsId = optional($this->route('news'))->id;
 
-        // dd($this->all());
+    return [
+        'title' => ['required', 'string', 'max:255'],
+        'slug' => [
+            'required',
+            'string',
+            'max:255',
+            'alpha_dash',
+            Rule::unique('news', 'slug')->ignore($newsId, 'id')
+        ],
+        'content' => ['required', 'string'],
+        'published_at' => ['nullable', 'date'],
+        'image' => ['nullable', 'string'],
+        'topic_id' => ['required', 'exists:topics,id'],
 
-        $newsId = optional($this->route('news'))->id; 
-        
-        return [
-            'title' => ['required', 'string', 'max:255'],
-
-            'slug' => [
-                'required', 
-                'string', 
-                'max:255', 
-                'alpha_dash', 
-                Rule::unique('news', 'slug')->ignore($newsId, 'id')
-            ],
-            
-            'content' => ['required', 'string'],
-            'published_at' => ['nullable', 'date'],
-            'image' => ['nullable', 'string', 'mimes:jpg,png', 'max:5120'],
-            'topic_id' => ['required', 'exists:topics,id'],
-        ];
-    }
+        'status' => ['required', 'string', Rule::in(['draft', 'pending', 'published', 'archived'])],
+    ];
+}
 }
