@@ -37,10 +37,10 @@ class NewsTable extends TableView
             ->autoFilter()
             ->paginate($this->perPage);
     }
-    
-    public function columns(): array
+public function columns(): array
+
 {
-    return [
+    $columns = [
         Numbering::make('No'),
         Text::make('title', 'Judul')->sortable(),
         Text::make('author.name', 'Penulis'),
@@ -58,10 +58,13 @@ class NewsTable extends TableView
             return $html;
         }, 'Status'),
         DateTime::make('published_at', 'Tgl Publikasi')->sortable(),
-
-        Raw::make(function($news) {
+    ];
+    /** @var \App\Models\User $user */
+    $user = Auth::user();
+    if (!$user->hasRole('contributor')) {
+        $columns[] = RestfulButton::make('news')->only(['edit', 'delete']);
+        $columns[] = Raw::make(function($news) {
             $buttons = '<div class="ui buttons mini">';
-
             if ($news->status === 'pending' && Gate::allows('approve', $news)) {
                 $buttons .= '
                     <form action="'.route('news.approve', $news->id).'" method="POST" style="display:inline-block;">
@@ -69,20 +72,6 @@ class NewsTable extends TableView
                         <button type="submit" class="ui button green" title="Setujui">Setujui</button>
                     </form>';
             }
-
-            if (Gate::allows('update', $news)) {
-                $buttons .= ' <a href="'.route('news.edit', $news->id).'" class="ui icon button blue" title="Edit"><i class="edit icon"></i></a>';
-            }
-
-            if (Gate::allows('delete', $news)) {
-                 $buttons .= '
-                    <form action="'.route('news.destroy', $news->id).'" method="POST" style="display:inline-block;" onsubmit="return confirm(\'Anda yakin?\');">
-                        <input type="hidden" name="_method" value="DELETE">
-                        <input type="hidden" name="_token" value="'.csrf_token().'">
-                        <button type="submit" class="ui icon button red" title="Hapus"><i class="trash icon"></i></button>
-                    </form>';
-            }
-            
             if (Gate::allows('flag', $news)) {
                 if ($news->is_flagged) {
                     $buttons .= '
@@ -98,23 +87,31 @@ class NewsTable extends TableView
                         </form>';
                 }
             }
-
             $buttons .= '</div>';
             return $buttons;
-
-        }, 'Aksi'),
-    ];
+        }, 'Aksi Kustom');
+    }
+    else {
+        $columns[] = Raw::make(function($news) {
+            if (Gate::allows('update', $news)) {
+                return '<a href="'.route('news.edit', $news->id).'" class="ui icon button mini blue" title="Edit"><i class="edit icon"></i></a>';
+            }
+            return '';
+        }, 'Aksi');
+    }
+    return $columns;
 }
+
 
 public function filters(): array
 {
     return [
         new AuthorFilter(),
         new TopicFilter(),
-        // new CreatedStartFilter(),
-        // new CreatedEndFilter(),
-        // new PublishedStartFilter(),
-        // new PublishedEndFilter(),
+        new CreatedStartFilter(),
+        new CreatedEndFilter(),
+        new PublishedStartFilter(),
+        new PublishedEndFilter(),
     ];
 }
 

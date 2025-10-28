@@ -46,13 +46,13 @@ class NewsPolicy
      * Determine whether the user can update the model.
      */
     public function update(User $user, News $news): bool
-{
+    {
 
-    if ($user->hasRole('Contributor')) {
+    if ($user->hasRole('contributor')) {
         return $user->can(Permission::NEWS_EDIT) && ($news->author_id === $user->id);
     }
     return $user->can(Permission::NEWS_EDIT);
-}
+    }
 
     
     public function flag(User $user, News $news): bool

@@ -6,7 +6,7 @@ use Carbon\Carbon;
 
 class CreatedStartFilter extends DateFilter
 {
-    protected string $label = 'Waktu Pembuatan';
+    protected string $label = 'dibuat setelah';
 
     public function apply($data, $value)
     {
@@ -14,5 +14,16 @@ class CreatedStartFilter extends DateFilter
             $data->where('created_at', '>=', Carbon::parse($value)->startOfDay());
         }
         return $data;
+    }
+
+    public function render(): string
+    {
+        $key = $this->key();
+
+        return form()->datepicker($key)
+            ->label($this->label)
+            ->placeholder($this->label)
+            ->removeClass('clearable')
+            ->attributes(['wire:model.live' => "filters.$key"]);
     }
 }

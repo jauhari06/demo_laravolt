@@ -15,4 +15,15 @@ class CreatedEndFilter extends DateFilter
         }
         return $data;
     }
+
+    public function render(): string
+    {
+        $key = $this->key();
+
+        return form()->datepicker($key)
+            ->label($this->label)
+            ->placeholder($this->label)
+            ->removeClass('clearable')
+            ->attributes(['wire:model.live' => "filters.$key"]);
+    }
 }
