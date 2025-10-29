@@ -14,7 +14,8 @@ final class Permission extends Enum
     // Permissions untuk News
     const NEWS_VIEW   = 'news.view';   
     const NEWS_CREATE = 'news.create'; 
-    const NEWS_EDIT   = 'news.edit';   
+    const NEWS_EDIT   = 'news.edit'; 
+    const NEWS_EDIT_OWN = 'news.edit-own';  
     const NEWS_DELETE = 'news.delete'; 
     const NEWS_PUBLISH= 'news.publish';
     const NEWS_FLAG   = 'news.flag';

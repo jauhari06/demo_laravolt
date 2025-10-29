@@ -47,11 +47,8 @@ class NewsPolicy
      */
     public function update(User $user, News $news): bool
     {
-
-    if ($user->hasRole('contributor')) {
-        return $user->can(Permission::NEWS_EDIT) && ($news->author_id === $user->id);
-    }
-    return $user->can(Permission::NEWS_EDIT);
+        return $user->can(Permission::NEWS_EDIT) 
+        || ($user->can(Permission::NEWS_EDIT_OWN) && $news->author_id === $user->id);
     }
 
     
