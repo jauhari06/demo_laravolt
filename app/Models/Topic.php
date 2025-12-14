@@ -18,15 +18,12 @@ class Topic extends Model
     {
         return $this->hasMany(News::class);
     }
-
-    /**
-     * Boot model dan tambahkan listener untuk aktivitas.
-     */
+    
     protected static function booted()
     {
         static::created(function ($topic) {
             /** @var \App\Models\User|null $user */
-            $user = Auth::user(); // Gunakan Auth::user() untuk mendapatkan user yang terautentikasi
+            $user = Auth::user(); 
 
             
             if ($user) {

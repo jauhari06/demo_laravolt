@@ -41,9 +41,7 @@ class NewsController extends Controller
 
         News::create($data);
 
-        return redirect()
-            ->route('news.index')
-            ->withSuccess('Berita berhasil disimpan.');
+        return redirect()->route('news.index')->withSuccess('Berita berhasil disimpan.');
     }
 
     public function edit(News $news)
@@ -67,9 +65,7 @@ class NewsController extends Controller
 
     $news->update($data);
 
-    return redirect()
-        ->route('news.index')
-        ->withSuccess('Berita berhasil diperbarui.');
+    return redirect()->route('news.index')->withSuccess('Berita berhasil diperbarui.');
 }
 
     public function destroy(News $news)
@@ -78,9 +74,7 @@ class NewsController extends Controller
 
         $news->delete();
 
-        return redirect()
-            ->route('news.index')
-            ->withSuccess('Berita berhasil dihapus.');
+        return redirect()->route('news.index')->withSuccess('Berita berhasil dihapus.');
     }
 
     public function flag($id)
@@ -90,9 +84,7 @@ class NewsController extends Controller
 
     $news->update(['is_flagged' => true]);
 
-    return redirect()
-        ->route('news.index')
-        ->withSuccess('Berita berhasil ditandai.');
+    return redirect()->route('news.index')->withSuccess('Berita berhasil ditandai.');
 }
 
 public function unflag($id)
@@ -102,9 +94,7 @@ public function unflag($id)
 
     $news->update(['is_flagged' => false]);
 
-    return redirect()
-        ->route('news.index')
-        ->withSuccess('Tanda pada berita telah dihapus.');
+    return redirect()->route('news.index')->withSuccess('Tanda pada berita telah dihapus.');
 }
 
 public function approve(News $news): RedirectResponse
@@ -112,9 +102,7 @@ public function approve(News $news): RedirectResponse
     $this->authorize('approve', $news);
 
     if ($news->is_flagged) {
-        return redirect()
-            ->route('news.index')
-            ->withErrors('Berita yang ditandai (flagged) tidak dapat dipublikasikan. Lepas tanda terlebih dahulu.');
+        return redirect()->route('news.index')->withErrors('Berita yang ditandai (flagged) tidak dapat dipublikasikan. Lepas tanda terlebih dahulu.');
     }
 
     $news->update([
@@ -123,9 +111,7 @@ public function approve(News $news): RedirectResponse
         'approved_at' => now(),
     ]);
 
-    return redirect()
-        ->route('news.index')
-        ->withSuccess('Berita berhasil dipublikasikan.');
+    return redirect()->route('news.index')->withSuccess('Berita berhasil dipublikasikan.');
 }
 
 }

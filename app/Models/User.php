@@ -10,6 +10,7 @@ use Laravolt\Platform\Models\User as BaseUser;
 use Laravolt\Suitable\AutoFilter;
 use Laravolt\Suitable\AutoSearch;
 use Laravolt\Suitable\AutoSort;
+use Laravel\Sanctum\HasApiTokens;
 
 /**
  * @use HasFactory<UserFactory>
@@ -19,7 +20,7 @@ class User extends BaseUser
     use AutoFilter, AutoSearch, AutoSort;
 
     /** @use HasFactory<UserFactory> */
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, HasApiTokens;
     // use \Laravel\Sanctum\HasApiTokens;
 
     /**
